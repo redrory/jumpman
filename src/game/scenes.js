@@ -6,26 +6,6 @@ game.module(
 )
 .body(function() {
 
-SceneEnd = game.Scene.extend({
-    backgroundColor: 0xff0000,
-
-    init: function(){
-
-        var carla = new game.Sprite('media/carla.jpg', 200, 200,{
-            anchor: {x: 0.5, y: 0.5}
-        });
-
-        this.stage.addChild(carla);
-
-
-        this.addTimer(2000, function(){
-            game.system.setScene(SceneGame);
-        });
-
-    }
-
-});
-
 SceneGame = game.Scene.extend({
     backgroundColor: 0xb2dcef,
     gapTime: 1500,
