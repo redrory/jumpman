@@ -13,10 +13,10 @@ Player = game.Class.extend({
         var x = game.system.width / 2;
         var y = 500;
         this.sprite = new game.MovieClip([
-            // game.Texture.fromImage('media/player1.png'),
-            game.Texture.fromImage('media/carla.jpg'),
-            game.Texture.fromImage('media/carla.jpg')
-            // game.Texture.fromImage('media/player2.png')
+            game.Texture.fromImage('media/player1.png'),
+            // game.Texture.fromImage('media/carla.jpg'),
+            // game.Texture.fromImage('media/carla.jpg')
+            game.Texture.fromImage('media/player2.png')
         ]);
         this.sprite.position.x = x;
         this.sprite.position.y = y;

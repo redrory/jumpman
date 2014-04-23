@@ -6,6 +6,18 @@ game.module(
 )
 .body(function() {
 
+SceneEnd = game.Scene.extend({
+    backgroundColor: 0xff0000,
+
+    init: function(){
+        this.addTimer(2000, function(){
+            game.system.setScene(SceneGame);
+        });
+
+    }
+
+});
+
 SceneGame = game.Scene.extend({
     backgroundColor: 0xb2dcef,
     gapTime: 1500,
@@ -54,7 +66,7 @@ SceneGame = game.Scene.extend({
         this.stage.addChild(text);
 
         game.audio.musicVolume = 0.2;
-        game.audio.playMusic('music');
+        // game.audio.playMusic('music');
     },
 
     spawnGap: function() {
@@ -96,6 +108,8 @@ SceneGame = game.Scene.extend({
         var box = new game.Sprite('media/gameover.png', game.system.width / 2, game.system.height / 2, {anchor: {x:0.5, y:0.5}});
 
         var highScore = parseInt(game.storage.get('highScore')) || 0;
+        var myScore = this.score;
+
         if(this.score > highScore) game.storage.set('highScore', this.score);
 
         var highScoreText = new game.BitmapText(highScore.toString(), {font: 'Pixel'});
@@ -116,7 +130,10 @@ SceneGame = game.Scene.extend({
             interactive: true,
             mousedown: function() {
                 game.analytics.event('restart');
-                game.system.setScene(SceneGame);
+                console.log('This is your most recent score ' + myScore);
+                console.log('This is your highscore ' + highScore);
+                game.system.setScene(SceneEnd);
+                // game.system.setScene(SceneGame);
             }
         });
 
