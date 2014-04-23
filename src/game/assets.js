@@ -30,7 +30,7 @@ game.addAsset('media/new.png');
 game.addAsset('media/restart.png');
 game.addAsset('media/madewithpanda.png');
 game.addAsset('media/submit.png');
-
+game.addAsset('media/submitted.png');
 
 // Font
 game.addAsset('media/font.fnt');

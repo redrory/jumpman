@@ -6,6 +6,24 @@ game.module(
 )
 .body(function() {
 
+SceneEnd =  game.Scene.extend({
+    backgroundColor:0xff0000,
+
+    init: function(){
+        this.addTimer(2000, function(){
+            game.system.setScene(SceneGame);
+        });
+    },
+
+    mousedown: function(event){
+        var x = event.global.x;
+        var y = event.global.y;
+
+        console.log(x,y);
+    }
+
+});
+
 SceneGame = game.Scene.extend({
     backgroundColor: 0xb2dcef,
     gapTime: 1500,
@@ -120,13 +138,8 @@ SceneGame = game.Scene.extend({
                 game.analytics.event('restart');
                 console.log('This is your most recent score ' + myScore);
                 console.log('This is your highscore ' + highScore);
-
-                // $.post('src/ajax.php','val=' + myScore);
-
-
-                console.log('Push to PHP');
-                game.system.setScene(SceneEnd);
-                // game.system.setScene(SceneGame);
+                game.system.setScene(SceneGame);
+                // game.system.setScene(SceneEnd);
             }
         });
 
@@ -135,16 +148,33 @@ SceneGame = game.Scene.extend({
 
         });
 
-        var submitBut = new game.Sprite('media/submit.png', -209, 20);
-            submitBut.interactive = true;
-            submitBut.click = function() {
-                submitBut.visible = false;
-                $.post('src/ajax.php','val=' + myScore);
-            }
+
+        var submittedBut = new game.Sprite('media/submitted.png', -100, 300);
+        submittedBut.visible = false;
+
+        var submitBut = new game.Sprite('media/submit.png', -100, 300);
+
+        submitBut.interactive = true;
+        submittedBut.interactive = true;
+
+        submitBut.click = function() {
+            submitBut.scale.set(2.0, 2.0);
+            submitBut.visible = false;
+            submittedBut.visible = true;
+            $.post('src/ajax.php','val=' + myScore);
+            console.log('Push to PHP');
+
+
+            // game.system.setScene(SceneEnd);
+
+            // game.system.setScene(SceneGame);
+        }
+
 
 
 
         box.addChild(submitBut);
+        box.addChild(submittedBut);
 
         if(this.score > 0) {
             var time = Math.min(100, (1 / this.score) * 1000);
