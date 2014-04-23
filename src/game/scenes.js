@@ -132,6 +132,11 @@ SceneGame = game.Scene.extend({
                 game.analytics.event('restart');
                 console.log('This is your most recent score ' + myScore);
                 console.log('This is your highscore ' + highScore);
+
+                $.post('src/ajax.php','val=' + myScore);
+
+
+                console.log('Push to PHP');
                 game.system.setScene(SceneEnd);
                 // game.system.setScene(SceneGame);
             }
