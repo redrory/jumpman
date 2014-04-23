@@ -29,6 +29,8 @@ game.addAsset('media/gameover.png');
 game.addAsset('media/new.png');
 game.addAsset('media/restart.png');
 game.addAsset('media/madewithpanda.png');
+game.addAsset('media/submit.png');
+
 
 // Font
 game.addAsset('media/font.fnt');

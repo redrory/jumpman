@@ -10,6 +10,14 @@ SceneEnd = game.Scene.extend({
     backgroundColor: 0xff0000,
 
     init: function(){
+
+        var carla = new game.Sprite('media/carla.jpg', 200, 200,{
+            anchor: {x: 0.5, y: 0.5}
+        });
+
+        this.stage.addChild(carla);
+
+
         this.addTimer(2000, function(){
             game.system.setScene(SceneGame);
         });
@@ -133,7 +141,7 @@ SceneGame = game.Scene.extend({
                 console.log('This is your most recent score ' + myScore);
                 console.log('This is your highscore ' + highScore);
 
-                $.post('src/ajax.php','val=' + myScore);
+                // $.post('src/ajax.php','val=' + myScore);
 
 
                 console.log('Push to PHP');
@@ -141,6 +149,22 @@ SceneGame = game.Scene.extend({
                 // game.system.setScene(SceneGame);
             }
         });
+
+        this.submitButton = new game.Sprite('media/submit.png', game.system.width, game.system.height + 250, {
+            anchor: {x:0.5, y:0.5}
+
+        });
+
+        var submitBut = new game.Sprite('media/submit.png', -209, 20);
+            submitBut.interactive = true;
+            submitBut.click = function() {
+                submitBut.visible = false;
+                $.post('src/ajax.php','val=' + myScore);
+            }
+
+
+
+        box.addChild(submitBut);
 
         if(this.score > 0) {
             var time = Math.min(100, (1 / this.score) * 1000);
@@ -169,6 +193,7 @@ SceneGame = game.Scene.extend({
             .easing(game.Tween.Easing.Back.Out);
         tween.start();
         this.stage.addChild(this.restartButton);
+
     },
 
     gameOver: function() {
